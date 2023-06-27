@@ -32,8 +32,8 @@ jobs:
             docker push dadofbear/udagram-api-user:latest
             docker build -t dadofbear/udagram-frontend:latest ./udagram-frontend
             docker push dadofbear/udagram-frontend:latest
-            docker build -t dadofbear/udagram-reverseproxy:latest ./udagram-reverseproxy
-            docker push dadofbear/udagram-reverseproxy:latest
+            docker build -t dadofbear/reverseproxy:latest ./udagram-reverseproxy
+            docker push dadofbear/reverseproxy:latest
 
 
 # Orchestrate jobs using workflows
