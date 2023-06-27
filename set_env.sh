@@ -1,10 +1,13 @@
 # This file is used for convenience of local development.
 # DO NOT STORE YOUR CREDENTIALS INTO GIT
-export POSTGRES_USERNAME=postgres
-export POSTGRES_PASSWORD=mypassword
-export POSTGRES_HOST=postgres.cr9bldgsf1j6.us-east-1.rds.amazonaws.com
+export POSTGRES_USERNAME=root
+export POSTGRES_PASSWORD=password
+export POSTGRES_HOST=host.docker.internal
 export POSTGRES_DB=postgres
-export AWS_BUCKET=arn:aws:s3:::mybucket1200798
+export AWS_ACCESS_KEY_ID=ASIASQH3W7CUMQMHMVWQ
+export AWS_SECRET_ACCESS_KEY=ZxiDaSs8mAIsvlnbSk52Zdp6dTeFXYwcxL6SjAGT
+export AWS_SESSION_TOKEN=FwoGZXIvYXdzEAcaDHfB3e8UORTsZ31SfCLVAdjzO4GV00ckTkzQTANqHpO8OisxdnEYFKzz0ekb3yQfESBp4IU5Rl82ocbcn5+Y9Y9um8MbJBM0Ho6gsxaIdOq3WgvlhSjVjCX3D/6DeS0uipvC07uQuVbcwU6STgB/nn9jDj2NTt4ZU1YrNHeoLV1RvHlOn+Ug6Ie1AzNuYRcz4KM4ts5hi0MvONBg0Yd9D6HugZTLhaSKjkZ/RF9poRlexdUgayRLjVRqY/VYG0WMTT4N+kmn7ofMYNaS22ZVmbTAasYF3LIzjLS2KgqgqXE96Pz4EyiHx+ukBjItzlZOeIfm1sxcpxlsW2CDNw82AJEr27jGdTj1OpfVy8A6iHMcib1fFWfu6pct
+export AWS_BUCKET=mybucket2605257
 export AWS_REGION=us-east-1
 export AWS_PROFILE=default
 export JWT_SECRET=testing

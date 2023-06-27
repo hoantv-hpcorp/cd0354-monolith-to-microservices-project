@@ -18,6 +18,29 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World!"
 
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="18.06.3-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+
+      - run:
+          name: Build docker image
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker build -t dadofbear/udagram-api-feed:latest ./udagram-api-feed
+            docker push dadofbear/udagram-api-feed:latest
+            docker build -t dadofbear/udagram-api-user:latest ./udagram-api-user
+            docker push dadofbear/udagram-api-user:latest
+            docker build -t dadofbear/udagram-frontend:latest ./udagram-frontend
+            docker push dadofbear/udagram-frontend:latest
+            docker build -t dadofbear/udagram-reverseproxy:latest ./udagram-reverseproxy
+            docker push dadofbear/udagram-reverseproxy:latest
+
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
