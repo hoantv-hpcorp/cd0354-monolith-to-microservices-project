@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: udagram-api-feed
+  name: udagram-api-feed
+spec:
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+    # nodePort: 30003
+  selector:
+    service: udagram-api-feed
+  # type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: udagram-api-feed
+  name: udagram-api-feed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: udagram-api-feed
+  template:
+    metadata:
+      labels:
+        service: udagram-api-feed
+    spec:
+      containers:
+      - image: dadofbear/udagram-api-feed:latest
+        name: udagram-api-feed
+        imagePullPolicy: Always
+        env:
+        - name: POSTGRES_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: POSTGRES_USERNAME
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: POSTGRES_HOST
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: POSTGRES_DB
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: AWS_SECRET_ACCESS_KEY
+        - name: AWS_SESSION_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret
+              key: AWS_SESSION_TOKEN
+        - name: AWS_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: AWS_BUCKET
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: AWS_REGION
+        - name: AWS_PROFILE
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: AWS_PROFILE
+        - name: JWT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: JWT_SECRET
+        - name: URL
+          valueFrom:
+            configMapKeyRef:
+              name: env-configmap
+              key: URL
+      restartPolicy: Always
