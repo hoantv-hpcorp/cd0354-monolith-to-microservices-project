@@ -34,6 +34,13 @@ spec:
       - image: dadofbear/udagram-frontend:latest
         name: udagram-frontend
         imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "64m"
+          limits:
+            memory: "256Mi"
+            cpu: "256m"
         ports:
         - containerPort: 80
       restartPolicy: Always
